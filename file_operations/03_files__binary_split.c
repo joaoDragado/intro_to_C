@@ -1,9 +1,9 @@
 ﻿/*
 Αρχείο: 03_arxeia_dyadika_diaxorismos.c
 Πρόβλημα: Διάβασμα δεδομένων από δυαδικά αρχεία και διαχωρισμός των δεδομένων σε 3 αρχεία
-Λύση: Στο arxeio_proor1.txt αποθηκεύονται οι αριθμοί 0..9
-Στο arxeio_proor2.txt αποθηκεύονται οι αριθμοί 10..19
-Στο arxeio_proor3.txt αποθηκεύονται οι αριθμοί 20..40
+Λύση: Στο record_dest1.txt αποθηκεύονται οι αριθμοί 0..9
+Στο record_dest2.txt αποθηκεύονται οι αριθμοί 10..19
+Στο record_dest3.txt αποθηκεύονται οι αριθμοί 20..40
 
 */
 
@@ -12,100 +12,100 @@
 
 int main()
 {
-	FILE *arxeio_pigi;
-	FILE *arxeio_proor1;
-	FILE *arxeio_proor2;
-	FILE *arxeio_proor3;
-	int seira_akeraion[20];
-	int temp_seira_akeraion;
+	FILE *record_source;
+	FILE *record_dest1;
+	FILE *record_dest2;
+	FILE *record_dest3;
+	int seq_int[20];
+	int temp_seq_int;
 	int j;
 
     // ʼνοιγμα αρχείων για εγγραφή
-	arxeio_pigi = fopen("arxeio_pigi.bin", "w+");
-	arxeio_proor1 = fopen("arxeio_proor1.bin", "w+");
-	arxeio_proor2 = fopen("arxeio_proor2.bin", "w+");
-	arxeio_proor3 = fopen("arxeio_proor3.bin", "w+");
+	record_source = fopen("record_source.bin", "w+");
+	record_dest1 = fopen("record_dest1.bin", "w+");
+	record_dest2 = fopen("record_dest2.bin", "w+");
+	record_dest3 = fopen("record_dest3.bin", "w+");
 
-    // Εισαγωγή δεδομένων στον πίνακα seira_akeraion
+    // Εισαγωγή δεδομένων στον πίνακα seq_int
 	for (j=0;j<20;j++)
 	{
-		seira_akeraion[j] = 2*j;
+		seq_int[j] = 2*j;
 	}
 
     // Εγγραφή δεδομένων στο αρχείο
-	if (!fwrite(seira_akeraion, (sizeof(int)*20), 1, arxeio_pigi))
-		printf("Error seira_akeraion\n");
+	if (!fwrite(seq_int, (sizeof(int)*20), 1, record_source))
+		printf("Error seq_int\n");
 
     // Κλείσιμο αρχείου
-	fclose(arxeio_pigi);
+	fclose(record_source);
 
 	// ʼνοιγμα αρχείου για ανάγνωση
-	arxeio_pigi = fopen("arxeio_pigi.bin", "r");
+	record_source = fopen("record_source.bin", "r");
 
-    // Εκτύπωση περιεχομένων του αρχείου arxeio_pigi
-	printf("To periexomeno tou arxeiou \"arxeio_pigi.bin\" einai:");
-	while(!feof(arxeio_pigi))
+    // Εκτύπωση περιεχομένων του αρχείου record_source
+	printf("To periexomeno tou recordu \"record_source.bin\" einai:");
+	while(!feof(record_source))
 	{
-		if(fread(&temp_seira_akeraion, sizeof(temp_seira_akeraion), 1, arxeio_pigi))
+		if(fread(&temp_seq_int, sizeof(temp_seq_int), 1, record_source))
 		{
-			printf("%d ", temp_seira_akeraion);
+			printf("%d ", temp_seq_int);
 		}
-		if (temp_seira_akeraion<=9)
+		if (temp_seq_int<=9)
 		{
-			fwrite(&temp_seira_akeraion, sizeof(temp_seira_akeraion), 1, arxeio_proor1);  // Εγγραφή στο arxeio_poor1
+			fwrite(&temp_seq_int, sizeof(temp_seq_int), 1, record_dest1);  // Εγγραφή στο record_poor1
 		}
-		else if (temp_seira_akeraion<=19)
+		else if (temp_seq_int<=19)
 		{
-			fwrite(&temp_seira_akeraion, sizeof(temp_seira_akeraion), 1, arxeio_proor2); // Εγγραφή στο arxeio_poor2
+			fwrite(&temp_seq_int, sizeof(temp_seq_int), 1, record_dest2); // Εγγραφή στο record_poor2
 		}
 		else
 		{
-			fwrite(&temp_seira_akeraion, sizeof(temp_seira_akeraion), 1, arxeio_proor3); // Εγγραφή στο arxeio_poor3
+			fwrite(&temp_seq_int, sizeof(temp_seq_int), 1, record_dest3); // Εγγραφή στο record_poor3
 		}
 	}
 	printf("\n");
 
     // Κλείσιμο αρχείων
-	fclose(arxeio_proor1);
-	fclose(arxeio_proor2);
-	fclose(arxeio_proor3);
+	fclose(record_dest1);
+	fclose(record_dest2);
+	fclose(record_dest3);
 
     // ʼνοιγμα αρχείων για ανάγνωση
-	arxeio_proor1 = fopen("arxeio_proor1.bin", "r");
-	arxeio_proor2 = fopen("arxeio_proor2.bin", "r");
-	arxeio_proor3 = fopen("arxeio_proor3.bin", "r");
+	record_dest1 = fopen("record_dest1.bin", "r");
+	record_dest2 = fopen("record_dest2.bin", "r");
+	record_dest3 = fopen("record_dest3.bin", "r");
 
-    // Εκτύπωση περιεχομένων του αρχείου arxeio_poor1
-	printf("To periexomeno tou arxeiou \"arxeio_proor1.bin\" einai:");
-	while(!feof(arxeio_proor1))
+    // Εκτύπωση περιεχομένων του αρχείου record_poor1
+	printf("To periexomeno tou recordu \"record_dest1.bin\" einai:");
+	while(!feof(record_dest1))
 	{
-		if(fread(&temp_seira_akeraion, sizeof(temp_seira_akeraion), 1, arxeio_proor1))
-			printf("%d ", temp_seira_akeraion);
+		if(fread(&temp_seq_int, sizeof(temp_seq_int), 1, record_dest1))
+			printf("%d ", temp_seq_int);
 	}
 	printf("\n");
 
-    // Εκτύπωση περιεχομένων του αρχείου arxeio_poor2
-	printf("To periexomeno tou arxeiou \"arxeio_proor2.bin\" einai:");
-	while(!feof(arxeio_proor2))
+    // Εκτύπωση περιεχομένων του αρχείου record_poor2
+	printf("To periexomeno tou recordu \"record_dest2.bin\" einai:");
+	while(!feof(record_dest2))
 	{
-		if(fread(&temp_seira_akeraion, sizeof(temp_seira_akeraion), 1, arxeio_proor2))
-			printf("%d ", temp_seira_akeraion);
+		if(fread(&temp_seq_int, sizeof(temp_seq_int), 1, record_dest2))
+			printf("%d ", temp_seq_int);
 	}
 	printf("\n");
 
-    // Εκτύπωση περιεχομένων του αρχείου arxeio_poor1
-	printf("To periexomeno tou arxeiou \"arxeio_proor3.bin\" einai:");
-	while(!feof(arxeio_proor3))
+    // Εκτύπωση περιεχομένων του αρχείου record_poor1
+	printf("To periexomeno tou recordu \"record_dest3.bin\" einai:");
+	while(!feof(record_dest3))
 	{
-		if(fread(&temp_seira_akeraion, sizeof(temp_seira_akeraion), 1, arxeio_proor3))
-			printf("%d ", temp_seira_akeraion);
+		if(fread(&temp_seq_int, sizeof(temp_seq_int), 1, record_dest3))
+			printf("%d ", temp_seq_int);
 	}
 	printf("\n");
 
     // Κλείσιμο όλων των αρχείων
-	fclose(arxeio_pigi);
-	fclose(arxeio_proor1);
-	fclose(arxeio_proor2);
-	fclose(arxeio_proor3);
+	fclose(record_source);
+	fclose(record_dest1);
+	fclose(record_dest2);
+	fclose(record_dest3);
 system("pause");
 }

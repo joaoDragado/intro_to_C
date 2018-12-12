@@ -3,7 +3,7 @@
 Πρόβλημα: Πως χειριζόμαστε αρχεία. Το άνοιγμα του αρχείου
 Λύση: Η fopen() ανοίγει ένα αρχείο και επιστρέφει ένα δείκτη τύπου FILE. Ο γενικός τρόπος χρήσης είναι
 	FILE *myFile1;
-	myFile1 = fopen(arxeio, τρόπος);
+	myFile1 = fopen(record, τρόπος);
 Ο τρόπος w+ δηλώνει άνοιγμα αρχείου κειμένου για ανάγνωση/εγγραφή
 Αν το άνοιγμα αποτύχει επιστρέφεται NULL
 Έννοιες που συναντάμε: fopen
@@ -12,16 +12,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define arxeio1 "arxeio1.txt"
+#define arxeio1 "record1.txt"
 
 int main ()
 {
 	FILE *myFile1, *myFile2, *myFile3;  // Δηλώσεις των μεταβλητών των αρχείων
-	char arxeio2[16] = "arxeio2.txt";
+	char record2[16] = "record2.txt";
 
-	myFile1 = fopen(arxeio1, "w+");        // άνοιγμα πρώτου αρχείου
-	myFile2 = fopen(arxeio2, "w+");        // άνοιγμα δεύτερου αρχείου
-	myFile3 = fopen("arxeio3.txt", "w+");  // άνοιγμα τρίτου αρχείου
+	myFile1 = fopen(record1, "w+");        // άνοιγμα πρώτου αρχείου
+	myFile2 = fopen(record2, "w+");        // άνοιγμα δεύτερου αρχείου
+	myFile3 = fopen("record3.txt", "w+");  // άνοιγμα τρίτου αρχείου
 
 	if (!myFile1)  // Αποτυχία ανοίγματος αρχείου (η τιμή του myFile1 είναι μηδενική)
 		printf("Error opening \"myFile1\"\n");

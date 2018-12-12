@@ -15,24 +15,24 @@ plithos: το πλήθος των τμημάτων
 
 int main()
 {
-	FILE *arxeioA;
-	FILE *arxeioB;
-	FILE *arxeioC;
-	char seira1[20];
-	int seira2[5];
-	int akeraios = 33;
+	FILE *recordA;
+	FILE *recordB;
+	FILE *recordC;
+	char sequence1[20];
+	int sequence2[5];
+	int integer = 33;
 
     // Άνοιγμα αρχείων
-	arxeioA = fopen("arxeio1.bin", "w");
-	arxeioB = fopen("arxeio2.bin", "w");
-	arxeioC = fopen("arxeio3.bin", "w");
+	recordA = fopen("record1.bin", "w");
+	recordB = fopen("record2.bin", "w");
+	recordC = fopen("record3.bin", "w");
 
 
-	if (!fwrite(seira1, (sizeof(char)*20), 1, arxeioA))    // Εγγραφή δεδομένων στο arxeioA
-		printf(" Error seira1\n");
-	if (!fwrite(seira2, (sizeof(int)*5), 1, arxeioB))      // Εγγραφή δεδομένων στο arxeioB
-		printf(" Error seira2\n");
-	if (!fwrite(&akeraios, sizeof(akeraios), 1, arxeioC))  // Εγγραφή δεδομένων στο arxeioC
-		printf(" Error akeraios\n");
+	if (!fwrite(sequence1, (sizeof(char)*20), 1, recordA))    // Εγγραφή δεδομένων στο recordA
+		printf(" Error sequence1\n");
+	if (!fwrite(sequence2, (sizeof(int)*5), 1, recordB))      // Εγγραφή δεδομένων στο recordB
+		printf(" Error sequence2\n");
+	if (!fwrite(&integer, sizeof(integer), 1, recordC))  // Εγγραφή δεδομένων στο recordC
+		printf(" Error integer\n");
 		system("pause");
 }
